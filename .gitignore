@@ -1,0 +1,5 @@
+.composer/
+vendor/
+logs/*
+composer.lock
+.glitch-assets
