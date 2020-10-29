@@ -1,9 +1,7 @@
 <?php
 
 // Parse input
-$uri = $_SERVER['REQUEST_URI'];
-$input = str_replace('/api/timestamp', '', $uri);
-$input = str_replace('/', '', $input);
+$input = getInput(__FILE__);
 
 // Process input
 if (!$input) {
@@ -40,7 +38,4 @@ else {
   ];
 }
 
-header("Access-Control-Allow-Origin: *");
-header('Content-type: application/json');
-echo json_encode($response);
-exit;
+sendResponse($response);
