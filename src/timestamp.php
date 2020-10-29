@@ -7,10 +7,7 @@ $input = str_replace('/', '', $input);
 
 // Process input
 if (!$input) {
-  // $requestTime = $_SERVER['REQUEST_TIME_FLOAT'];
   $requestTime = microtime(true);
-  // var_dump($requestTime, microtime(true));
-  // $d = DateTime::createFromFormat('U', sprintf("%d", $requestTime));
   $d = DateTime::createFromFormat('U.u', sprintf("%.6F", $requestTime));
 }
 else {
@@ -43,7 +40,6 @@ else {
   ];
 }
 
-// http_response_code(200);
 header("Access-Control-Allow-Origin: *");
 header('Content-type: application/json');
 echo json_encode($response);
