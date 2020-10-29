@@ -1,16 +1,11 @@
 <?php
 
 // Parse input
-$uri = $_SERVER['REQUEST_URI'];
-$input = str_replace('/api/timestamp', '', $uri);
-$input = str_replace('/', '', $input);
+$input = getInput(__FILE__);
 
 // Process input
 if (!$input) {
-  // $requestTime = $_SERVER['REQUEST_TIME_FLOAT'];
   $requestTime = microtime(true);
-  // var_dump($requestTime, microtime(true));
-  // $d = DateTime::createFromFormat('U', sprintf("%d", $requestTime));
   $d = DateTime::createFromFormat('U.u', sprintf("%.6F", $requestTime));
 }
 else {
@@ -43,8 +38,4 @@ else {
   ];
 }
 
-// http_response_code(200);
-header("Access-Control-Allow-Origin: *");
-header('Content-type: application/json');
-echo json_encode($response);
-exit;
+sendResponse($response);
