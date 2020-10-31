@@ -1,0 +1,2 @@
+<?php
+// add exercise endpoint

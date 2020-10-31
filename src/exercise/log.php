@@ -1,0 +1,2 @@
+<?php
+// exercise log endpoint

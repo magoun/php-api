@@ -28,6 +28,10 @@ if ($pieces[1] === 'api') {
     require_once('./src/shorturl.php');
   }
   
+  if ($endpoint === 'exercise') {
+    require_once('./src/exercise.php');
+  }
+  
 }
 
 echo 'Invalid API endpoint.';
