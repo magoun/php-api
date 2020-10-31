@@ -2,6 +2,7 @@
 
 // Load helper functions
 require_once('./src/helpers.php');
+// sendResponse($_POST);
 
 // Load db
 require_once('./rb.php');

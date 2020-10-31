@@ -7,9 +7,7 @@
 $input = getInput(__FILE__);
 
 // Process input
-$new = explode('?', $input)[0] === 'new';
-
-if ($new) {
+if ($input === 'new') {
   
   $url = validateInput($input);
   $short_url = minify($url);
@@ -26,15 +24,20 @@ if ($new) {
     
 }
 else {
-  
+
   // get minified url and return a rediect
-  $short_url = R::load('shorturl', $input);
-  
-  if ($short_url->id === 0) {
-    return404();
+  if ($id = intval($input)) {
+
+    $short_url = R::load('shorturl', $id);
+    
+    if ($short_url->id !== 0) {
+      redirect($short_url->original_url);
+    }
+    
   }
   
-  redirect($short_url->original_url);
+  // if not found, 404
+  return404();
   
 }
 
@@ -42,14 +45,9 @@ else {
 // Helper functions
 function validateInput($input) {
   
-  // strip 'new?' from input
-  $queryString = substr($input, 4);
+  $url = $_POST['url'];
   
-  // parse queryString into $params array
-  parse_str($queryString, $params);
-  $url = $params['url'];
-  
-  $pattern = '/^https?:\/\/(?:[\w-]+\.)+\w+$/';
+  $pattern = '/^https?:\/\/(?:[\w-]+\.)+\w+/';
   
   if (preg_match($pattern, $url)) {
     return $url;
@@ -74,6 +72,6 @@ function minify($url) {
 function redirect($url, $statusCode = 303) {
    
   header('Location: ' . $url, true, $statusCode);
-   exit;
+  exit;
   
 }
