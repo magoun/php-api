@@ -1,4 +1,5 @@
 .composer/
+database/
 vendor/
 logs/*
 composer.lock
