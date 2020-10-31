@@ -2,6 +2,11 @@
 
 // Load helper functions
 require_once('./src/helpers.php');
+// sendResponse($_POST);
+
+// Load db
+require_once('./rb.php');
+R::setup('sqlite:./database/sqlite.db');
 
 $route = $_SERVER['REQUEST_URI'];
 
@@ -17,6 +22,10 @@ if ($pieces[1] === 'api') {
   
   if ($endpoint === 'whoami') {
     require_once('./src/whoami.php');
+  }
+  
+  if ($endpoint === 'shorturl') {
+    require_once('./src/shorturl.php');
   }
   
 }
